@@ -1,20 +1,40 @@
-import {Http} from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/Rx';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {environment} from '../environments/environment';
 
 @Injectable()
 export class SpotifyService {
 
+  static BASE_URL = 'https://api.spotify.com/v1';
+
   constructor(private http: Http) {
   }
 
-  searchTrack(query: string) {
-    const params: string = [
+  query(URL: string, params?: Array<string>): Observable<any[]> {
+    let queryURL = `${SpotifyService.BASE_URL}${URL}`;
+    if (params) {
+      queryURL = `${queryURL}?${params.join('&')}`;
+    }
+    const apiKey = environment.spotifyApiKey;
+    const headers = new Headers({
+      'Authorization': `Bearer ${apiKey}`
+    });
+    const options = new RequestOptions({ headers: headers});
+
+    return this.http.request(queryURL, options).map((res: any) => res.json());
+  }
+
+  search(query: string, type: string) {
+    return this.query(`/search`, [
       `q=${query}`,
-      `type=track`
-    ].join('&');
-    const queryURL = `https://api.spotify.com/v1/search?${params}`;
-    return this.http.request(queryURL).map(res => res.json());
+      `type=${type}`
+    ]);
+  }
+
+  searchTrack(query: string): Observable<any[]> {
+    return this.search(query, 'track');
   }
 }
 
