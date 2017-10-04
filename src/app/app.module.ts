@@ -10,6 +10,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {SPOTIFY_PROVIDERS} from './spotify.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'search', pathMatch: 'full'},
@@ -34,6 +35,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
+    SPOTIFY_PROVIDERS,
     {provide: APP_BASE_HREF, useValue: '/'},
     {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
