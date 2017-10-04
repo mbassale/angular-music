@@ -3,7 +3,7 @@ import 'rxjs/Rx';
 import {Injectable} from '@angular/core';
 
 @Injectable()
-class SpotifyService {
+export class SpotifyService {
 
   constructor(private http: Http) {
   }
