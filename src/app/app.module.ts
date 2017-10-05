@@ -9,15 +9,19 @@ import {TrackComponent} from './track/track.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {APP_BASE_HREF, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {SPOTIFY_PROVIDERS} from './spotify.service';
+import {AUTH_PROVIDERS} from './auth.service';
+import {LoggedInGuard} from './logged-in.guard';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'search', pathMatch: 'full'},
-  {path: 'search', component: SearchComponent},
-  {path: 'artists/:id', component: ArtistComponent},
-  {path: 'tracks/:id', component: TrackComponent},
-  {path: 'albums/:id', component: AlbumComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'search', component: SearchComponent, canActivate: [LoggedInGuard]},
+  {path: 'artists/:id', component: ArtistComponent, canActivate: [LoggedInGuard]},
+  {path: 'tracks/:id', component: TrackComponent, canActivate: [LoggedInGuard]},
+  {path: 'albums/:id', component: AlbumComponent, canActivate: [LoggedInGuard]},
 ];
 
 @NgModule({
@@ -26,7 +30,8 @@ const routes: Routes = [
     AlbumComponent,
     ArtistComponent,
     SearchComponent,
-    TrackComponent
+    TrackComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +40,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [
+    AUTH_PROVIDERS,
     SPOTIFY_PROVIDERS,
     {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: PathLocationStrategy},
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })

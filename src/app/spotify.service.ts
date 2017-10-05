@@ -2,14 +2,14 @@ import {Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/Rx';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {environment} from '../environments/environment';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class SpotifyService {
 
   static BASE_URL = 'https://api.spotify.com/v1';
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authService: AuthService) {
   }
 
   query(URL: string, params?: Array<string>): Observable<any[]> {
@@ -17,9 +17,9 @@ export class SpotifyService {
     if (params) {
       queryURL = `${queryURL}?${params.join('&')}`;
     }
-    const apiKey = environment.spotifyApiKey;
+    const accessToken = this.authService.getAccessToken();
     const headers = new Headers({
-      'Authorization': `Bearer ${apiKey}`
+      'Authorization': `Bearer ${accessToken}`
     });
     const options = new RequestOptions({headers: headers});
 
