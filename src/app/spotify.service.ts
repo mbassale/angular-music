@@ -21,7 +21,7 @@ export class SpotifyService {
     const headers = new Headers({
       'Authorization': `Bearer ${apiKey}`
     });
-    const options = new RequestOptions({ headers: headers});
+    const options = new RequestOptions({headers: headers});
 
     return this.http.request(queryURL, options).map((res: any) => res.json());
   }
@@ -35,6 +35,10 @@ export class SpotifyService {
 
   searchTrack(query: string): Observable<any[]> {
     return this.search(query, 'track');
+  }
+
+  getTrack(id: string): Observable<any[]> {
+    return this.query(`/tracks/${id}`);
   }
 }
 

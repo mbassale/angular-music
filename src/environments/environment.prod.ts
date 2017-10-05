@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  spotifyApiKey: 'BQDOVPV-v-vds4XhvQaLP2unL-6SFWTJQrNahRa5QSQWLuIOXLW_lO0VH6m3dCICIKYT6bBARY3bn-Fw47vO2rojrt3AqsKS_4k2IKG4y4W0_VEaKcUN0OyJNnAEQHL2MRUtinq-Pzy1mNJsx8xFj3aOTpYG_Yi_vyc'
+  spotifyApiKey: 'BQC2SVGQ-hyOEBqLzb1ZOhCTHlE7DGyyxEhc229dppl6gODsRmfZZHREiEsH2gNsvW0PcI1d6ya54hsRK5C5grVmhA6s6lzJz0jb7YqY1EGRaACaREiP2njfDfql38NRpZuplbo4hgxTavanTXFTrCNECmGkRvjgYus'
 };
