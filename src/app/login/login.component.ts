@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     const params = [
       `client_id=${environment.spotifyClientId}`,
       'response_type=token',
-      'redirect_uri=http://localhost:4200/login'
+      'redirect_uri=' + environment.spotifyAuthCallback
     ].join('&');
     location.href = `https://accounts.spotify.com/authorize?${params}`;
   }
