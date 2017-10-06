@@ -43,7 +43,6 @@ const routes: Routes = [
     AUTH_PROVIDERS,
     SPOTIFY_PROVIDERS,
     {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: LocationStrategy, useClass: PathLocationStrategy},
     LoggedInGuard
   ],
   bootstrap: [AppComponent]
