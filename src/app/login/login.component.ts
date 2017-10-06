@@ -19,18 +19,17 @@ export class LoginComponent implements OnInit {
       this.accessToken = params['access_token'] || null;
     });
     route.fragment.subscribe((params: string) => {
-      if (params === null || params === '') {
-        return;
-      }
-      console.log('Fragment', params);
-      const vars = params.split('&');
-      for (let i = 0; i < vars.length; i++) {
-        const varsParts = vars[i].split('=');
-        if (varsParts.length >= 2) {
-          const queryKey = decodeURIComponent(varsParts[0]);
-          if (queryKey === 'access_token') {
-            this.accessToken = decodeURIComponent(varsParts[1]);
-            console.log('AccessToken', this.accessToken);
+      if (params) {
+        console.log('Fragment', params);
+        const vars = params.split('&');
+        for (let i = 0; i < vars.length; i++) {
+          const varsParts = vars[i].split('=');
+          if (varsParts.length >= 2) {
+            const queryKey = decodeURIComponent(varsParts[0]);
+            if (queryKey === 'access_token') {
+              this.accessToken = decodeURIComponent(varsParts[1]);
+              console.log('AccessToken', this.accessToken);
+            }
           }
         }
       }

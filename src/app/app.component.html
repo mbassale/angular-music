@@ -1,6 +1,7 @@
 <div class="page-header">
   <div class="container">
     <h1>Spotify <small>Music Search</small></h1>
+    <button *ngIf="authService.isLoggedIn()" class="btn btn-default btn-xs" (click)="logout()">[Logout]</button>
   </div>
 </div>
 
