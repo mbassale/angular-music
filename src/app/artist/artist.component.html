@@ -1,3 +1,22 @@
-<p>
-  artist works!
-</p>
+<div class="row" *ngIf="artist">
+  <h1>{{ artist.name }}</h1>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="{{ artist.images[1].url }}" [style.max-width.px]="'300'">
+    </div>
+    <div class="col-md-9" [style.padding-left.px]="'50'">
+      <dl>
+        <dt>Artist</dt>
+        <dd>{{ artist.name }}</dd>
+        <dt>Genres</dt>
+        <dd>
+          <em *ngFor="let genre of artist.genres; let idx = index">{{ genre }} {{ idx < artist.genres.length - 1 ? ', ' : '' }}</em>
+        </dd>
+
+        <dt>Followers</dt>
+        <dd>{{ artist.followers.total || 'N/A' }}</dd>
+      </dl>
+    </div>
+  </div>
+  <button class="btn btn-default btn-primary" href (click)="back()" [style.margin-top.px]="'10'">Back</button>
+</div>

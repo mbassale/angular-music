@@ -40,6 +40,10 @@ export class SpotifyService {
   getTrack(id: string): Observable<any[]> {
     return this.query(`/tracks/${id}`);
   }
+
+  getArtist(id: string): Observable<any[]> {
+    return this.query(`/artists/${id}`);
+  }
 }
 
 export const SPOTIFY_PROVIDERS: Array<any> = [
