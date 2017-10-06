@@ -1,3 +1,37 @@
-<p>
-  album works!
-</p>
+<div class="row" *ngIf="album">
+  <h1>{{ album.name }}</h1>
+  <div class="row">
+    <div class="col-md-3">
+      <img src="{{ album.images[1].url }}" [style.max-width.px]="'300'">
+    </div>
+    <div class="col-md-9" [style.padding-left.px]="'50'">
+      <dl>
+        <dt>Album</dt>
+        <dd>{{ album.name }}</dd>
+        <dt>Release Date</dt>
+        <dd>{{ album.release_date }}</dd>
+        <dt>Copyright</dt>
+        <dd>{{ album.copyrights[0].text || 'N/A' }}</dd>
+      </dl>
+    </div>
+  </div>
+  <button class="btn btn-default btn-primary" href (click)="back()" [style.margin-top.px]="'10'">Back</button>
+  <div class="row" [style.margin-top.px]="'20'">
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let track of album.tracks.items">
+          <td>{{ track.track_number }}</td>
+          <td>{{ track.name }}</td>
+          <td><button type="button" class="btn btn-default btn-xs" (click)="showTrack(track.id)">Show</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
