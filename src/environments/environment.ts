@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  baseUrl: '/',
   spotifyClientId: '59f43d2b99e34aa991c72ffcb99e287a',
   spotifyAuthCallback: 'http://localhost:4200/login'
 };

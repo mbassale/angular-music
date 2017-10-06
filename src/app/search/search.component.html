@@ -1,12 +1,15 @@
-<h1>Search</h1>
-<p>
-  <input type="text" #newquery
+<div class="row">
+  <h1>Search</h1>
+  <div class="input-group">
+  <input class="form-control" type="text" #newquery
          [value]="query"
          (keydown.enter)="submit(newquery.value)">
-  <button (click)="submit(newquery.value)">Search</button>
-</p>
-
-<div *ngIf="results">
+    <div class="input-group-btn">
+    <button class="btn btn-primary" (click)="submit(newquery.value)">Search</button>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="results">
   <div *ngIf="!results.length">
     No tracks were found with the term '{{ query }}'
   </div>

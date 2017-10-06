@@ -9,11 +9,12 @@ import {TrackComponent} from './track/track.component';
 import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {APP_BASE_HREF, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {APP_BASE_HREF} from '@angular/common';
 import {SPOTIFY_PROVIDERS} from './spotify.service';
 import {AUTH_PROVIDERS} from './auth.service';
 import {LoggedInGuard} from './logged-in.guard';
 import {LoginComponent} from './login/login.component';
+import {environment} from '../environments/environment';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -42,7 +43,7 @@ const routes: Routes = [
   providers: [
     AUTH_PROVIDERS,
     SPOTIFY_PROVIDERS,
-    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: APP_BASE_HREF, useValue: environment.baseUrl},
     LoggedInGuard
   ],
   bootstrap: [AppComponent]
