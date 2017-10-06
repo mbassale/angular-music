@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {APP_BASE_HREF, Location} from '@angular/common';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   accessToken: string;
 
-  constructor(private location: Location, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService) {
     route.queryParams.subscribe((params: Params) => {
       console.log('AccessToken', params['access_token']);
       this.accessToken = params['access_token'] || null;
@@ -38,9 +38,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['search']);
+    }
     if (this.accessToken !== null) {
       this.authService.login(this.accessToken);
-      this.location.go('/search');
+      this.router.navigate(['search']);
     }
   }
 
